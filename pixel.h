@@ -16,6 +16,13 @@
     #include <stddef.h>
     #include <time.h>
 
+typedef struct mouse_s{
+
+    sfColor color;
+    sfVector2i position;
+
+} mouse_t;
+
 typedef struct index_s {
 
     int size;
@@ -35,10 +42,11 @@ typedef struct framebuffer_s {
     unsigned int y;
     sfUint8 *pixel;
     sfTexture *texture;
+    sfSprite *sprite;
 
 } framebuffer_t;
 
-framebuffer_t *my_framebuffer_create(framebuffer_t *framebuffer, sfTexture *texture);
+framebuffer_t *my_framebuffer_create(framebuffer_t *framebuffer);
 void my_put_pixel(framebuffer_t *framebuffer, unsigned int height,
                   unsigned int width, sfColor color);
 void *my_calloc(size_t type, size_t size);
