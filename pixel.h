@@ -14,7 +14,10 @@
     #include <SFML/Config.h>
     #include <stdlib.h>
     #include <stddef.h>
+    #include <stdbool.h>
+    #include <unistd.h>
     #include <time.h>
+    #include <fcntl.h>
 
 typedef struct mouse_s{
 
@@ -60,4 +63,11 @@ void fade(framebuffer_t *buff, index_t *i, sfRenderWindow *window);
 void square_print(framebuffer_t *framebuffer, unsigned int size, unsigned int
                   startx, unsigned int starty, sfColor color);
 void my_reset_framebuffer(framebuffer_t *framebuffer);
+int pencil_paint(framebuffer_t *buff, mouse_t *m, sfRenderWindow *window, sfEvent *event);
+int fill_color(framebuffer_t *buff, sfRenderWindow *win, sfEvent *e, mouse_t *m);
+bool is_same_color(sfUint8 co, framebuffer_t *buff, int x, int y);
+bool is_same(sfUint8 pix, sfUint8 pixel);
+int my_erase(framebuffer_t *framebuffer, mouse_t *mouse);
+char *my_convert_buff(sfUint8 *pixel, int length);
+int save_png_file(char *buff);
 #endif
