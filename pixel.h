@@ -46,6 +46,11 @@ typedef struct framebuffer_s {
     sfUint8 *pixel;
     sfTexture *texture;
     sfSprite *sprite;
+    sfText *text;
+    int namelen;
+    sfFont *font;
+    sfRectangleShape *rect;
+    int fd;
 
 } framebuffer_t;
 
@@ -70,4 +75,13 @@ bool is_same(sfUint8 pix, sfUint8 pixel);
 int my_erase(framebuffer_t *framebuffer, mouse_t *mouse);
 char *my_convert_buff(sfUint8 *pixel, int length);
 int save_png_file(char *buff);
+void my_file_explorer(int option, framebuffer_t *buff, sfEvent *event);
+sfRectangleShape *my_rect_create(sfVector2f size, sfVector2f position);
+void my_framebuffer_destroy(framebuffer_t *buffer);
+char *my_strcat(char *dest, char *src);
+char *my_strncat(char *dest, char *src, int nb);
+void my_new_file(framebuffer_t *buff, sfEvent *event);
+char *enter_name(framebuffer_t *buffer, sfEvent *event);
+void my_open_file(framebuffer_t *buff, sfEvent *event);
+void my_save_file(framebuffer_t *buff, sfEvent *event);
 #endif
