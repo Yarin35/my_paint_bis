@@ -47,6 +47,7 @@ typedef struct framebuffer_s {
     sfTexture *texture;
     sfSprite *sprite;
     sfText *text;
+    char *name;
     int namelen;
     sfFont *font;
     sfRectangleShape *rect;
@@ -84,4 +85,5 @@ void my_new_file(framebuffer_t *buff, sfEvent *event);
 char *enter_name(framebuffer_t *buffer, sfEvent *event);
 void my_open_file(framebuffer_t *buff, sfEvent *event);
 void my_save_file(framebuffer_t *buff, sfEvent *event);
+int my_save_buffer(framebuffer_t *buff);
 #endif

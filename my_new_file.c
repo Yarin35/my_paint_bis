@@ -6,6 +6,7 @@
 */
 
 #include "pixel.h"
+#include <stdio.h>
 
 char *enter_name(framebuffer_t *buffer, sfEvent *event)
 {
@@ -14,12 +15,14 @@ char *enter_name(framebuffer_t *buffer, sfEvent *event)
 
 //    while (!enter)
         if (event->type == sfEvtTextEntered) {
-            if (event->text.unicode >= 32 && event->text.unicode < 127)
+            if (event->text.unicode >= 48 && event->text.unicode <= 122)
                 name[buffer->namelen ++] = (char)event->text.unicode;
             if (event->text.unicode == 0 && buffer->namelen > 0)
                 name[-- buffer->namelen] = '\0';
-//            if (event->text.unicode == 13)
+//            if (event->text.unicode == 13) {
+//                printf("done\n");
 //                enter = true;
+//            }
         }
     if (buffer->namelen != 0) {
         name[buffer->namelen] = '\0';
@@ -35,9 +38,8 @@ void my_new_file(framebuffer_t *buff, sfEvent *event)
     char *filename = enter_name(buff, event);
 
     if (filename) {
-        my_strcat((char *)buff->text, filename);
-        buff->fd = open(filename, O_CREAT | O_RDWR, 00666);
-        sfText_setString(buff->text, filename);
+        buff->name = my_strcat(buff->name, filename);
+        sfText_setString(buff->text, buff->name);
         free(filename);
     }
     return;

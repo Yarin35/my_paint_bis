@@ -22,7 +22,7 @@ int main(void)
             if (event.type == sfEvtMouseButtonPressed) {
                 mouse->position.x = event.mouseButton.x;
                 mouse->position.y = event.mouseButton.y;
-//                square_print(framebuffer, 6, event.mouseButton.x, event.mouseButton.y, sfCyan);
+                square_print(framebuffer, 6, event.mouseButton.x, event.mouseButton.y, sfCyan);
 //                my_erase(framebuffer, mouse);
 //                fill_color(framebuffer, window, &event, mouse);
                 pencil_paint(framebuffer, mouse, window, &event);
@@ -51,6 +51,8 @@ int main(void)
         sfRenderWindow_drawSprite(window, framebuffer->sprite, NULL);
         sfRenderWindow_display(window);
     }
+    if (option == 1)
+        my_save_buffer(framebuffer);
     my_framebuffer_destroy(framebuffer);
     sfRenderWindow_destroy(window);
     return 0;

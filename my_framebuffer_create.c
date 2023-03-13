@@ -32,6 +32,7 @@ framebuffer_t *my_framebuffer_create(framebuffer_t *framebuffer)
     framebuffer->texture = sfTexture_create(1920, 1080);
     framebuffer->font = sfFont_createFromFile("Ambra-Sans-Italic-trial.ttf");
     framebuffer->text = sfText_create();
+    framebuffer->name = my_calloc(1, 100);
     framebuffer->rect = my_rect_create((sfVector2f){100, 40},
                                        (sfVector2f){960, 540});
     sfText_setFont(framebuffer->text, framebuffer->font);
