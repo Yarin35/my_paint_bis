@@ -15,14 +15,23 @@ void my_framebuffer_destroy(framebuffer_t *buffer)
     sfText_destroy(buffer->text);
     sfFont_destroy(buffer->font);
     sfRectangleShape_destroy(buffer->rect);
-    close(buffer->fd);
+    if (buffer->option != 0)
+        fclose(buffer->fd);
     free(buffer);
+    return;
+}
+
+static void set_to_white(framebuffer_t *framebuffer, size_t len)
+{
+    for (size_t i = 0; i <= len; i ++)
+        framebuffer->pixel[i] = 255;
+    for (size_t i = 3; i <= len; i += 4)
+        framebuffer->pixel[i] = 0;
     return;
 }
 
 framebuffer_t *my_framebuffer_create(framebuffer_t *framebuffer)
 {
-    sfVector2f origin = {3, 3};
     sfVector2f position = {1920 / 2, 1080 / 2};
 
     framebuffer = my_calloc(sizeof(framebuffer_t), 1);
@@ -32,7 +41,7 @@ framebuffer_t *my_framebuffer_create(framebuffer_t *framebuffer)
     framebuffer->texture = sfTexture_create(1920, 1080);
     framebuffer->font = sfFont_createFromFile("Ambra-Sans-Italic-trial.ttf");
     framebuffer->text = sfText_create();
-    framebuffer->name = my_calloc(1, 100);
+    framebuffer->name = my_calloc(sizeof(unsigned char), 10);
     framebuffer->rect = my_rect_create((sfVector2f){100, 40},
                                        (sfVector2f){960, 540});
     sfText_setFont(framebuffer->text, framebuffer->font);
@@ -41,7 +50,6 @@ framebuffer_t *my_framebuffer_create(framebuffer_t *framebuffer)
     sfText_setPosition(framebuffer->text, position);
     sfText_setString(framebuffer->text, "");
     sfSprite_setTexture(framebuffer->sprite, framebuffer->texture, sfTrue);
-    sfSprite_setOrigin(framebuffer->sprite, origin);
-    framebuffer->pixel = my_calloc(sizeof(sfUint8), (1920 * 1080 * 4));
+    set_to_white(framebuffer, (1920 * 1080 * 4));
     return framebuffer;
 }

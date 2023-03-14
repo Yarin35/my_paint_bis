@@ -14,7 +14,6 @@ int main(void)
     sfEvent event;
     framebuffer_t *framebuffer = my_framebuffer_create(framebuffer);
     mouse_t *mouse = my_calloc(sizeof(mouse_t), 1);
-    int option = 0;
 
     mouse->color = sfCyan;
     while(sfRenderWindow_isOpen(window)) {
@@ -33,25 +32,27 @@ int main(void)
                 if (sfKeyboard_isKeyPressed(sfKeyEscape))
                     sfRenderWindow_close(window);
                 if (sfKeyboard_isKeyPressed(sfKeySpace)) {
-                    my_reset_framebuffer(framebuffer);
-                    option = 1;
-//                    my_file_explorer(option, framebuffer, &event);
+//                    my_reset_framebuffer(framebuffer);
+                    framebuffer->option = 1;
+                    my_file_explorer(framebuffer, &event);
                     sfRenderWindow_clear(window, sfWhite);
                     sfRenderWindow_display(window);
                 }
+                if (sfKeyboard_isKeyPressed(sfKeyP))
+                    my_load_buffer("assets/hello.jpg", framebuffer);
             }
-            if (option != 0)
-                my_file_explorer(option, framebuffer, &event);
+            if (framebuffer->option == 1)
+                my_file_explorer(framebuffer, &event);
         }
         sfRenderWindow_clear(window, sfWhite);
-        if (option == 1) {
+        if (framebuffer->option == 1) {
             sfRenderWindow_drawRectangleShape(window, framebuffer->rect, NULL);
             sfRenderWindow_drawText(window, framebuffer->text, NULL);
         }
         sfRenderWindow_drawSprite(window, framebuffer->sprite, NULL);
         sfRenderWindow_display(window);
     }
-    if (option == 1)
+    if (framebuffer->option == 1)
         my_save_buffer(framebuffer);
     my_framebuffer_destroy(framebuffer);
     sfRenderWindow_destroy(window);
