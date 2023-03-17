@@ -10,7 +10,8 @@
 void square_print(framebuffer_t *buff, int size, int x, int y)
 {
     for (int i = x; i <= x + size; i ++)
-        for (int y = y; y <= y + size; y ++)
-            my_put_pixel(buff, i, y, buff->col);
+        for (int j = y; j <= y + size; j ++)
+            my_put_pixel(buff, i, j, buff->col);
+    sfTexture_updateFromPixels(buff->texture, buff->pixel, 1920, 1080, 0, 0);
     return;
 }
