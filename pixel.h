@@ -50,6 +50,7 @@ typedef struct framebuffer_s {
     sfText *text;
     char *name;
     int namelen;
+    bool namefull;
     sfFont *font;
     sfRectangleShape *rect;
     FILE *fd;
@@ -82,10 +83,12 @@ void my_file_explorer(framebuffer_t *buff, sfEvent *event);
 sfRectangleShape *my_rect_create(sfVector2f size, sfVector2f position);
 void my_framebuffer_destroy(framebuffer_t *buffer);
 char *my_strcat(char *dest, char *src);
+char *my_strncat(char *dest, char *src, int nb);
 void my_new_file(framebuffer_t *buff, sfEvent *event);
 char *enter_name(framebuffer_t *buffer, sfEvent *event);
 void my_open_file(framebuffer_t *buff, sfEvent *event);
 void my_save_file(framebuffer_t *buff, sfEvent *event);
 int my_save_buffer(framebuffer_t *buff);
-void my_load_buffer(char const *filename, framebuffer_t *framebuffer);
+int my_load_buffer(/*char const *filename,*/ framebuffer_t *buff, sfEvent *event/*, sfRenderWindow *window*/);
+int my_put_circle(framebuffer_t *framebuffer, int width, int height, sfColor c);
 #endif

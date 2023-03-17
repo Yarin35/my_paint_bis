@@ -19,13 +19,16 @@ char *enter_name(framebuffer_t *buffer, sfEvent *event)
         if (event->text.unicode == 0 && buffer->namelen > 0)
             name[-- buffer->namelen] = '\0';
     }
-    if (/*event->text.unicode == 13 && */buffer->namelen != 0) {
-        name[buffer->namelen] = '\0';
-        buffer->namelen = 0;
+    name[buffer->namelen] = '\0';
+    buffer->namelen = 0;
+    if (sfKeyboard_isKeyPressed(sfKeyEnter)) {
+        if (!buffer->namefull)
+            buffer->namefull = true;
+        else
+            buffer->namefull = false;
         return name;
     }
-    free(name);
-    return NULL;
+    return name;
 }
 
 void my_new_file(framebuffer_t *buff, sfEvent *event)
@@ -35,9 +38,6 @@ void my_new_file(framebuffer_t *buff, sfEvent *event)
     if (filename) {
         buff->name = my_strcat(buff->name, filename);
         sfText_setString(buff->text, buff->name);
-        printf("namelen is %i\n", buff->namelen);
-//        if (buff->namelen == 0)
-//            my_save_buffer(buff);
         free(filename);
     }
     return;

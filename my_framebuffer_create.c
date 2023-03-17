@@ -15,7 +15,7 @@ void my_framebuffer_destroy(framebuffer_t *buffer)
     sfText_destroy(buffer->text);
     sfFont_destroy(buffer->font);
     sfRectangleShape_destroy(buffer->rect);
-    if (buffer->option != 0)
+    if (buffer->namefull)
         fclose(buffer->fd);
     free(buffer);
     return;
@@ -23,6 +23,7 @@ void my_framebuffer_destroy(framebuffer_t *buffer)
 
 static void set_to_white(framebuffer_t *framebuffer, size_t len)
 {
+    framebuffer->namefull = false;
     for (size_t i = 0; i <= len; i ++)
         framebuffer->pixel[i] = 255;
     for (size_t i = 3; i <= len; i += 4)

@@ -21,7 +21,8 @@ int main(void)
             if (event.type == sfEvtMouseButtonPressed) {
                 mouse->position.x = event.mouseButton.x;
                 mouse->position.y = event.mouseButton.y;
-                square_print(framebuffer, 6, event.mouseButton.x, event.mouseButton.y, sfCyan);
+                my_put_circle(framebuffer, mouse->position.x, mouse->position.y, sfCyan);
+//                square_print(framebuffer, 6, event.mouseButton.x, event.mouseButton.y, sfCyan);
 //                my_erase(framebuffer, mouse);
 //                fill_color(framebuffer, window, &event, mouse);
                 pencil_paint(framebuffer, mouse, window, &event);
@@ -38,11 +39,19 @@ int main(void)
                     sfRenderWindow_clear(window, sfWhite);
                     sfRenderWindow_display(window);
                 }
-                if (sfKeyboard_isKeyPressed(sfKeyP))
-                    my_load_buffer("assets/hello.jpg", framebuffer);
+                if (sfKeyboard_isKeyPressed(sfKeyDelete)) {
+                    framebuffer->option = 1;
+                    my_file_explorer(framebuffer, &event);
+                    sfRenderWindow_clear(window, sfWhite);
+                    sfRenderWindow_display(window);
+//                    my_load_buffer(/*"assets/hello.jpg",*/ framebuffer, &event);
+                }
             }
             if (framebuffer->option == 1)
+//                my_load_buffer(framebuffer, &event);
                 my_file_explorer(framebuffer, &event);
+            if (framebuffer->namefull)
+                my_load_buffer(framebuffer, &event);
         }
         sfRenderWindow_clear(window, sfWhite);
         if (framebuffer->option == 1) {
