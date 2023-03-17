@@ -14,7 +14,12 @@ int my_save_buffer(framebuffer_t *buff)
     size_t len = size.x * size.y * 4;
 
     buff->name = my_strcat("assets/", buff->name);
-    buff->name = my_strcat(buff->name, ".jpg");
+    if (buff->filetype == 1)
+        buff->name = my_strcat(buff->name, ".jpg");
+    if (buff->filetype == 2)
+        buff->name = my_strcat(buff->name, ".png");
+    if (buff->filetype == 3)
+        buff->name = my_strcat(buff->name, ".bmp");
     buff->fd = fopen(buff->name, "wb");
     if (buff->fd == NULL)
         return 84;
