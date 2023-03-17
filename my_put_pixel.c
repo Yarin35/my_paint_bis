@@ -7,14 +7,13 @@
 
 #include "pixel.h"
 
-void my_put_pixel(framebuffer_t *framebuffer, unsigned int height,
-               unsigned int width, sfColor color)
+void my_put_pixel(framebuffer_t *buffer, int height, int width, sfColor color)
 {
     if (height <= 1920 && width <= 1080) {
-        framebuffer->pixel[(1920 * width + height) * 4] = color.r;
-        framebuffer->pixel[(1920 * width + height) * 4 + 1] = color.g;
-        framebuffer->pixel[(1920 * width + height) * 4 + 2] = color.b;
-        framebuffer->pixel[(1920 * width + height) * 4 + 3] = color.a;
+        buffer->pixel[(1920 * width + height) * 4] = color.r;
+        buffer->pixel[(1920 * width + height) * 4 + 1] = color.g;
+        buffer->pixel[(1920 * width + height) * 4 + 2] = color.b;
+        buffer->pixel[(1920 * width + height) * 4 + 3] = color.a;
     }
     return;
 }

@@ -24,6 +24,7 @@ void my_framebuffer_destroy(framebuffer_t *buffer)
 static void set_to_white(framebuffer_t *framebuffer, size_t len)
 {
     framebuffer->namefull = false;
+    framebuffer->col = sfCyan;
     for (size_t i = 0; i <= len; i ++)
         framebuffer->pixel[i] = 255;
     for (size_t i = 3; i <= len; i += 4)
@@ -44,7 +45,7 @@ framebuffer_t *my_framebuffer_create(framebuffer_t *framebuffer)
     framebuffer->text = sfText_create();
     framebuffer->name = my_calloc(sizeof(unsigned char), 10);
     framebuffer->rect = my_rect_create((sfVector2f){100, 40},
-                                       (sfVector2f){960, 540});
+    (sfVector2f){960, 540});
     sfText_setFont(framebuffer->text, framebuffer->font);
     sfText_setCharacterSize(framebuffer->text, 20);
     sfText_setFillColor(framebuffer->text, sfBlack);

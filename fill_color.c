@@ -32,7 +32,7 @@ static void recursive_check(framebuffer_t *buff, int x, int y, sfColor color)
             my_put_pixel(buff, x --, y, color);
     }
 }
-int fill_color(framebuffer_t *buff, sfRenderWindow *win, sfEvent *e, mouse_t *m)
+int fill_color(framebuffer_t *buff, sfRenderWindow *w, sfEvent *e, mouse_t *m)
 {
     sfUint8 co = (1920 * e->mouseButton.x + e->mouseButton.y) * 4;
 

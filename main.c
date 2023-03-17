@@ -21,11 +21,11 @@ int main(void)
             if (event.type == sfEvtMouseButtonPressed) {
                 mouse->position.x = event.mouseButton.x;
                 mouse->position.y = event.mouseButton.y;
-                my_put_circle(framebuffer, mouse->position.x, mouse->position.y, sfCyan);
+                my_put_circle(framebuffer, mouse->position.x, mouse->position.y);
 //                square_print(framebuffer, 6, event.mouseButton.x, event.mouseButton.y, sfCyan);
 //                my_erase(framebuffer, mouse);
 //                fill_color(framebuffer, window, &event, mouse);
-                pencil_paint(framebuffer, mouse, window, &event);
+//                pencil_paint(framebuffer, mouse, window, &event);
             }
             if (event.type == sfEvtClosed)
                 sfRenderWindow_close(window);

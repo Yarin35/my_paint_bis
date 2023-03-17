@@ -12,6 +12,6 @@ void my_square_fade(framebuffer_t *framebuffer, unsigned int size,
 {
     for (int i = startx; i <= startx + size && i + size <= 1920; i ++)
         for (int y = starty; y <= starty + size && y + size <= 1080; y ++)
-            my_pixel_fade(framebuffer, i, y);    
+            my_pixel_fade(framebuffer, i, y);
     return;
 }

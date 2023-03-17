@@ -7,11 +7,10 @@
 
 #include "pixel.h"
 
-void square_print(framebuffer_t *framebuffer, unsigned int size, unsigned int
-                   startx, unsigned int starty, sfColor color)
+void square_print(framebuffer_t *buff, int size, int x, int y)
 {
-    for (int i = startx; i <= startx + size; i ++)
-        for (int y = starty; y <= starty + size; y ++)
-            my_put_pixel(framebuffer, i, y, color);
+    for (int i = x; i <= x + size; i ++)
+        for (int y = y; y <= y + size; y ++)
+            my_put_pixel(buff, i, y, buff->col);
     return;
 }

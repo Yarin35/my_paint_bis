@@ -10,7 +10,7 @@
 void my_pixel_fade(framebuffer_t *framebuffer, unsigned int x, unsigned int y)
 {
     sfColor color = sfTransparent;
-    
+
     if (x <= 1920 && y <= 1080) {
         framebuffer->pixel[(1920 * y + x) + 4] = color.r;
         framebuffer->pixel[(1920 * y + x) + 4 + 1] = color.g;

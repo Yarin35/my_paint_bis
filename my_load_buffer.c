@@ -7,20 +7,7 @@
 
 #include "pixel.h"
 
-/*static int my_get_name(framebuffer_t *buffer, sfEvent *event, sfRenderWindow *window)
-{
-    char *filename = enter_name(buffer, event);
-
-    if (filename) {
-        buffer->name = my_strcat(buffer->name, filename);
-        sfText_setString(buffer->text, buffer->name);
-        free(filename);
-        return 0;
-    }
-    return 84;
-    }*/
-
-int my_load_buffer(/*char const *filename, */framebuffer_t *buff, sfEvent *event/*, sfRenderWindow *window*/)
+int my_load_buffer(framebuffer_t *buff, sfEvent *event)
 {
     char *filename = my_strcat("assets/", my_strcat(buff->name, ".jpg"));
     sfImage *picture;
@@ -36,6 +23,5 @@ int my_load_buffer(/*char const *filename, */framebuffer_t *buff, sfEvent *event
         buff->pixel[i] = pixel[i];
     sfTexture_updateFromPixels(buff->texture, buff->pixel, 1920, 1080, 0, 0);
     sfSprite_setTexture(buff->sprite, buff->texture, sfTrue);
-//    free(pixel);
     return 0;
 }
