@@ -22,6 +22,12 @@ char *enter_name(framebuffer_t *buffer, sfEvent *event)
     name[buffer->namelen] = '\0';
     buffer->namelen = 0;
     if (sfKeyboard_isKeyPressed(sfKeyEnter)) {
+        buffer->name = my_strcat(buffer->name, name);
+        sfText_setString(buffer->text, buffer->name);
+        if (buffer->option == 1)
+            my_save_buffer(buffer);
+        else
+            buffer->option = 4;
         if (!buffer->namefull)
             buffer->namefull = true;
         else
