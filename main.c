@@ -21,8 +21,9 @@ int main(void)
             if (event.type == sfEvtMouseButtonPressed) {
                 mouse->position.x = event.mouseButton.x;
                 mouse->position.y = event.mouseButton.y;
-                my_put_circle(framebuffer, mouse->position.x, mouse->position.y);
-//                square_print(framebuffer, 6, event.mouseButton.x, event.mouseButton.y, sfCyan);
+                my_put_rectangle(framebuffer, 50, event.mouseButton.x, event.mouseButton.y);
+//                my_put_circle(framebuffer, mouse->position.x, mouse->position.y);
+//                square_print(framebuffer, 6, event.mouseButton.x, event.mouseButton.y);
 //                my_erase(framebuffer, mouse);
 //                fill_color(framebuffer, window, &event, mouse);
 //                pencil_paint(framebuffer, mouse, window, &event);
@@ -36,33 +37,33 @@ int main(void)
 //                    my_reset_framebuffer(framebuffer);
                     framebuffer->option = 1;
                     my_file_explorer(framebuffer, &event);
-                    sfRenderWindow_clear(window, sfWhite);
-                    sfRenderWindow_display(window);
+//                    sfRenderWindow_clear(window, sfWhite);
+//                    sfRenderWindow_display(window);
                 }
                 if (sfKeyboard_isKeyPressed(sfKeyDelete)) {
-                    framebuffer->option = 1;
+                    framebuffer->option = 2;
                     my_file_explorer(framebuffer, &event);
-                    sfRenderWindow_clear(window, sfWhite);
-                    sfRenderWindow_display(window);
+//                    sfRenderWindow_clear(window, sfWhite);
+//                    sfRenderWindow_display(window);
 //                    my_load_buffer(/*"assets/hello.jpg",*/ framebuffer, &event);
                 }
             }
-            if (framebuffer->option == 1)
-//                my_load_buffer(framebuffer, &event);
+            if (framebuffer->option == 1 || framebuffer->option == 2) {
                 my_file_explorer(framebuffer, &event);
-            if (framebuffer->namefull)
-                my_load_buffer(framebuffer, &event);
+                if (framebuffer->namefull)
+                    my_load_buffer(framebuffer, &event);
+            }
         }
         sfRenderWindow_clear(window, sfWhite);
-        if (framebuffer->option == 1) {
+        if (framebuffer->option == 1 || framebuffer->option == 2) {
             sfRenderWindow_drawRectangleShape(window, framebuffer->rect, NULL);
             sfRenderWindow_drawText(window, framebuffer->text, NULL);
         }
         sfRenderWindow_drawSprite(window, framebuffer->sprite, NULL);
         sfRenderWindow_display(window);
     }
-    if (framebuffer->option == 1)
-        my_save_buffer(framebuffer);
+//    if (framebuffer->option == 4)
+//        my_save_buffer(framebuffer);
     my_framebuffer_destroy(framebuffer);
     sfRenderWindow_destroy(window);
     return 0;

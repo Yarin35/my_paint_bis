@@ -10,13 +10,10 @@
 char *enter_name(framebuffer_t *buffer, sfEvent *event)
 {
     char *name = my_calloc(sizeof(unsigned char), 10);
-
-    if (buffer->namelen == 9)
-        return NULL;
-    if (event->type == sfEvtTextEntered) {
+    if (buffer->namelen < 9 && event->type == sfEvtTextEntered) {
         if (event->text.unicode >= 48 && event->text.unicode <= 122)
             name[buffer->namelen ++] = (char)event->text.unicode;
-        if (event->text.unicode == 0 && buffer->namelen > 0)
+        if (event->text.unicode == 8 && buffer->namelen > 0)
             name[-- buffer->namelen] = '\0';
     }
     name[buffer->namelen] = '\0';
@@ -26,13 +23,11 @@ char *enter_name(framebuffer_t *buffer, sfEvent *event)
         sfText_setString(buffer->text, buffer->name);
         if (buffer->option == 1)
             my_save_buffer(buffer);
-        else
-            buffer->option = 4;
+        buffer->option = 4;
         if (!buffer->namefull)
             buffer->namefull = true;
         else
             buffer->namefull = false;
-        return name;
     }
     return name;
 }
