@@ -15,7 +15,7 @@ void my_framebuffer_destroy(framebuffer_t *buffer)
     sfText_destroy(buffer->text);
     sfFont_destroy(buffer->font);
     sfRectangleShape_destroy(buffer->rect);
-    if (buffer->namefull)
+    if (buffer->namefull && buffer->option == 1)
         fclose(buffer->fd);
     free(buffer);
     return;
