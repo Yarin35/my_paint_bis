@@ -21,8 +21,8 @@ int main(void)
             if (event.type == sfEvtMouseButtonPressed) {
                 mouse->position.x = event.mouseButton.x;
                 mouse->position.y = event.mouseButton.y;
-                my_put_rectangle(framebuffer, 50, event.mouseButton.x, event.mouseButton.y);
-//                my_put_circle(framebuffer, mouse->position.x, mouse->position.y);
+//                my_put_rectangle(framebuffer, 50, event.mouseButton.x, event.mouseButton.y);
+                my_put_circle(framebuffer, 5, mouse->position.x, mouse->position.y);
 //                square_print(framebuffer, 6, event.mouseButton.x, event.mouseButton.y);
 //                my_erase(framebuffer, mouse);
 //                fill_color(framebuffer, window, &event, mouse);
@@ -31,6 +31,17 @@ int main(void)
             if (event.type == sfEvtClosed)
                 sfRenderWindow_close(window);
             if (event.type == sfEvtKeyPressed) {
+                if (sfKeyboard_isKeyPressed(sfKeyJ))
+                    framebuffer->filetype = 1;
+                if (sfKeyboard_isKeyPressed(sfKeyP))
+                    framebuffer->filetype = 2;
+                if (sfKeyboard_isKeyPressed(sfKeyB))
+                    framebuffer->filetype = 3;
+                if (sfKeyboard_isKeyPressed(sfKeyK)) {
+                    my_reset_framebuffer(framebuffer);
+                    sfRenderWindow_clear(window, sfWhite);
+                    sfRenderWindow_display(window);
+                }
                 if (sfKeyboard_isKeyPressed(sfKeyEscape))
                     sfRenderWindow_close(window);
                 if (sfKeyboard_isKeyPressed(sfKeySpace)) {

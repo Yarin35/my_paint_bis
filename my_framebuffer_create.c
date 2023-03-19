@@ -25,6 +25,7 @@ static void set_to_white(framebuffer_t *framebuffer, size_t len)
 {
     framebuffer->namefull = false;
     framebuffer->col = sfCyan;
+    framebuffer->filetype = 1;
     for (size_t i = 0; i <= len; i ++)
         framebuffer->pixel[i] = 255;
     for (size_t i = 3; i <= len; i += 4)

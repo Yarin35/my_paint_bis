@@ -15,9 +15,9 @@ static void check(framebuffer_t *buff, int distance, int i, int j)
         my_put_pixel(buff, i, j, buff->col);
 }
 
-int my_put_circle(framebuffer_t *buff, int width, int height)
+int my_put_circle(framebuffer_t *buff, int circle, int width, int height)
 {
-    int radius = 20;
+    int radius = circle;
     int x = width;
     int y = height;
     int distance = 0;

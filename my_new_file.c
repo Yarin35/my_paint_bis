@@ -7,23 +7,32 @@
 
 #include "pixel.h"
 
+static void get_char(framebuffer_t *buff, sfEvent *evt, char *name)
+{
+    if (evt->text.unicode >= 48 && evt->text.unicode <= 122)
+        name[buff->namelen ++] = (char)evt->text.unicode;
+    if (evt->text.unicode == 8 && buff->namelen > 0)
+        name[-- buff->namelen] = '\0';
+}
+
 char *enter_name(framebuffer_t *buffer, sfEvent *event)
 {
     char *name = my_calloc(sizeof(unsigned char), 10);
-    if (buffer->namelen < 9 && event->type == sfEvtTextEntered) {
-        if (event->text.unicode >= 48 && event->text.unicode <= 122)
-            name[buffer->namelen ++] = (char)event->text.unicode;
-        if (event->text.unicode == 8 && buffer->namelen > 0)
-            name[-- buffer->namelen] = '\0';
-    }
+    if (buffer->namelen < 9 && event->type == sfEvtTextEntered)
+        get_char(buffer, event, name);
     name[buffer->namelen] = '\0';
     buffer->namelen = 0;
     if (sfKeyboard_isKeyPressed(sfKeyEnter)) {
         buffer->name = my_strcat(buffer->name, name);
         sfText_setString(buffer->text, buffer->name);
-        if (buffer->option == 1)
+        if (buffer->option == 1) {
             my_save_buffer(buffer);
-        buffer->option = 4;
+            buffer->name = my_calloc(1, 10);
+        } //else if (buffer->option == 2) {
+          //  my_load_buffer(buffer, event);
+          //  buffer->name = my_calloc(1, 10);
+//        }
+        buffer->option = 0;
         if (!buffer->namefull)
             buffer->namefull = true;
         else

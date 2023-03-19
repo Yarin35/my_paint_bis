@@ -88,6 +88,6 @@ char *enter_name(framebuffer_t *buffer, sfEvent *event);
 void my_save_file(framebuffer_t *buff, sfEvent *event);
 int my_save_buffer(framebuffer_t *buff);
 int my_load_buffer(framebuffer_t *buff, sfEvent *event);
-int my_put_circle(framebuffer_t *buff, int width, int height);
+int my_put_circle(framebuffer_t *buff, int circle, int width, int height);
 int my_put_rectangle(framebuffer_t *buff, int size, int x, int y);
 #endif
